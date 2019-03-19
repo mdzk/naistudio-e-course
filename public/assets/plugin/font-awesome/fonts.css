@@ -1,0 +1,27 @@
+/*Include*/
+@font-face {
+	font-family: 'pp-bold';
+	font-weight: bold;
+	src: url('../fonts/Poppins-Bold.ttf');
+}
+
+@font-face {
+	font-family: 'pp';
+	src: url('../fonts/Poppins-Regular.ttf');
+}
+
+@font-face {
+	font-family: 'pp-medium';
+	src: url('../fonts/Poppins-Medium.ttf');
+}
+
+@font-face {
+	font-family: 'nn-bold';
+	font-weight: bold;
+	src: url('../fonts/Nunito-Bold.ttf');
+}
+
+@font-face {
+	font-family: 'nn';
+	src: url('../fonts/Nunito-Regular.ttf');
+}

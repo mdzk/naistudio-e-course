@@ -1,0 +1,292 @@
+@media (max-width: 1199px){
+    .left-content{
+        display: none;
+    }
+    .mobile-category {
+        display: inherit;
+    }
+    .tab-contents {
+        width: auto;
+    }
+    .profile-wrepper{
+        max-width: 800px;
+    }
+
+}
+
+@media (max-width: 1128px){
+    .wrepper{
+        max-width: 1030px;
+    }
+}
+
+@media (max-width: 1048px){
+    .wrepper{
+        max-width: 780px;
+    }
+}
+
+@media (max-width: 797px){
+    .wrepper{
+        max-width: 530px;
+    }
+    
+    #nav-dekstop{
+        display: none;
+    }
+
+    #nav-bars{
+        display: block;
+    }
+
+    #header{
+        position: absolute;
+    }
+
+    .footer-item{
+        padding: 0 20px 0 20px;
+    }
+
+    .footer-bottom-wrepper{
+        padding: 0 20px 0 20px;
+    }
+
+    .right-box-filter{
+        position: relative;
+        display: block;
+        width: -webkit-fit-content;
+        width: -moz-fit-content;
+        width: fit-content;
+        right: 0;
+        margin-left: auto;;
+    }
+
+     .profile-wrepper{
+        max-width: 520px;
+    }
+
+}
+
+@media (max-width: 549px){
+    .wrepper{
+        max-width: 100%;
+    }
+    .content-item{
+        width: 100%;
+    }
+     .profile-wrepper{
+        max-width: 100%;
+    }
+     .ZNjxnsj {
+        margin-left: auto;
+        margin-right: auto;
+     }
+}
+
+@media (max-width: 992px) {
+
+    /*Login*/
+    .feature-login {
+        display: none;
+    }
+
+    .logo-login {
+        display: inherit!important;
+        width: 150px;
+        margin-bottom: 50px;
+    }
+
+    .mar_top4 {
+        margin-top: 50px!important;
+    }
+    .if-main{
+        display: none !important;
+    }
+
+    .if{
+        max-width: 500px;
+        margin: auto;
+        border: 1px solid #e4e4e4;
+    }
+}
+
+
+
+
+
+@media (min-width: 992px) and (max-width: 1199px) {
+
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+    div.header-wrepper{
+        width: 100%;
+    }
+
+
+
+}
+
+@media (min-width: 320px) and (max-width: 767px) {
+
+}
+
+@media (min-width: 480px) and (max-width: 767px) {
+
+}
+
+@media (min-width: 576px) and (max-width: 767px) {
+
+}
+
+
+@media (min-width: 768px) and (max-width: 1200px) {
+}
+
+
+@media (max-width: 991px) {
+}
+
+
+@media (max-width: 767px) {
+}
+
+
+@media (max-width: 767px) {
+}
+
+
+@media (max-width: 480px) {
+}
+
+
+@media (min-width: 768px) and (max-width: 1200px) {
+
+    .content-grid {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .content-hero-wrepper {
+        max-width: 970px;
+    }
+
+    .hero-img img {
+        min-width: 100px;
+    }
+}
+
+@media (max-width: 1100px) {
+
+    .header-logo img {
+        width: 140px
+    }
+
+    .header-nav-responsive {
+        display: block;
+    }
+
+    .header-nav-dekstop {
+        display: none;
+    }
+
+    .btn-search {
+        width: 160px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .content-grid {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+}
+
+@media (max-width: 767px) {
+    #hero-img-action-1 {
+        display: block;
+    }
+
+    #hero-img-action-2 {
+        display: none;
+    }
+
+    #content-1-img-1 {
+        display: none;
+    }
+
+    #content-1-img-2 {
+        display: block;
+        padding: 0 40px 0 40px;
+    }
+
+    #content-2-img-2 {
+        display: none;
+    }
+
+    #content-2-img-1 {
+        display: block;
+        padding: 0 40px 0 40px;
+    }
+
+    .hero-des-wrapper {
+        text-align: center;
+    }
+
+    .about-wrepper {
+        padding: 0;
+    }
+
+    #content-1 h4,
+    #content-2 h4,
+    #content-1 p,
+    #content-2 p,
+    #content-1 .button {
+        text-align: center !important;
+    }
+
+    .button-content {
+        padding: 0 30px 0 30px;
+    }
+
+    .button-content a {
+        width: 100%;
+        border: none;
+    }
+
+    .footer-logo {
+        display: none;
+    }
+
+}
+
+@media (max-width: 767px) {
+    .content-wrepper {
+        max-width: 500px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .search-wrepper {
+        padding: 30px 20px 30px 20px;
+    }
+
+    #search .content-grid {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .header-wrepper {
+        padding: 0 10px 15px 10px;
+    }
+
+    #content-2-img-1 {
+        padding: 0;
+    }
+}
+
+/* @media (min-width: 480px) and (max-width: 767px) {}
+
+@media (min-width: 576px) and (max-width: 767px) {} */
