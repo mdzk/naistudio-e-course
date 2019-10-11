@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','level',
+        'name', 'email', 'bio','gambar','status','password','level',
     ];
 
     /**
@@ -30,6 +30,10 @@ class User extends Authenticatable
 
     public function beli() {
         return $this->hasOne('App\BeliModel','id_user','id');
+    }
+
+    public function materi() {
+        return $this->hasOne('App\MateriModel','id_user','id');
     }
 
     public function bookmark() {

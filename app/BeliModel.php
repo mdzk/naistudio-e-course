@@ -11,7 +11,7 @@ class BeliModel extends Model
     public $timestamps = false;
 
     public function materi() {
-        return $this->hasMany('App\MateriModel', 'id','id_materi');
+        return $this->hasOne('App\MateriModel', 'id','id_materi');
     }
 
     public function user() {

@@ -17,13 +17,34 @@ class LoginController extends Controller
             return redirect()->back();
         } else {
             if ($request->isMethod('post')) {
-                if (Auth::attempt([
-                    'email' => $request->input('email'),
-                    'password' => $request->input('password')])
-                ) {
-                    if (Auth::user()->level == 'admin') {
-                        return redirect('admin/home');
+                
+                if ($request->input('submit')) {
+                    if (Auth::attempt([
+                        'email' => $request->input('email'),
+                        'password' => $request->input('password')])
+                    ) {
+                        if (Auth::user()->level == 'admin') {
+                            return redirect('admin');
+                        }else {
+                            return redirect('profile');
+                        }
+                    }
+                } else {
+                    $validator = Validator::make($request->all(), [
+                        'name' => 'required',
+                        'email' => 'required|unique:users',
+                        'password' => 'required',
+                    ]);
+
+                    if ($validator->fails()) {
+                        echo '<script>alert("Silahkan isi semua kolom. atau Username/Email sudah terdaftar")</script>';
                     }else {
+                        User::create([
+                            'name'     => $request->input('name'),
+                            'email'    => $request->input('email'),
+                            'level'    => 'user',
+                            'password' => Hash::make($request->input('password')),
+                        ]);
                         return redirect('profile');
                     }
                 }
@@ -46,13 +67,13 @@ class LoginController extends Controller
                 User::create([
                     'name'     => $request->input('name'),
                     'email'    => $request->input('email'),
-                    'level'    => 1,
+                    'level'    => 'user',
                     'password' => Hash::make($request->input('password')),
                 ]);
                 return redirect('profile');
             }
         }
-        return view('login');
+        return view('daftar');
     }
 
     public function logout() {

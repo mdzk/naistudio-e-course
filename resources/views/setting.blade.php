@@ -6,6 +6,14 @@
   <div class="profile-wrepper" style="padding: 0">
     <div class="content">
       <section class="section">
+        <div class="section-header">
+          <h1>Setting</h1>
+          <div class="section-header-breadcrumb">
+            <div class="breadcrumb-item active"><a href="{{ url('/profile') }}">Profile</a></div>
+            <div class="breadcrumb-item">Setting</div>
+          </div>
+        </div>
+
         <div class="section-body">
           <h2 class="section-title">Hi, {{ $user->name }}!</h2>
           <p class="section-lead">
@@ -19,7 +27,12 @@
                   <div class="card-body">
                     <div class="form-group">
                       <label>Photo</label>
-                      <input type="file" name="gambar" class="form-control" @if(isset($user)) value="{{ $user->gambar }}" @endif>
+                      <div class="custom-file">
+                        <input type="file" name="gambar" class="custom-file-input" id="customFile" @if(isset($user)) value="{{ $user->gambar }}" @endif>
+                        <label class="custom-file-label" for="customFile">Choose file</label>
+                      </div>
+                      {{-- <label>Photo</label>
+                      <input type="file" name="gambar" class="form-control" @if(isset($user)) value="{{ $user->gambar }}" @endif> --}}
                     </div>
                     <div class="form-group">
                       <label>Name</label>

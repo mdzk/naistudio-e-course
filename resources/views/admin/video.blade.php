@@ -12,7 +12,7 @@
       <p>Transaksi</p>
     </a>
   </li>
-  <li class="nav-item active ">
+  <li class="nav-item  ">
     <a class="nav-link" href="{{ url('admin/user') }}">
       <i class="material-icons">person</i>
       <p>User</p>
@@ -30,7 +30,7 @@
       <p>Kategori</p>
     </a>
   </li>
-  <li class="nav-item ">
+  <li class="nav-item active ">
     <a class="nav-link" href="{{ url('admin/video') }}">
       <i class="material-icons">play_arrow</i>
       <p>Video</p>
@@ -48,13 +48,13 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-12">
-          <a href="{{ url('admin/user/add') }}" class="btn btn-success"><i class="material-icons">add</i> <b>Tambah User</b></a>
+          <a href="{{ url('admin/video/add') }}" class="btn btn-success"><i class="material-icons">add</i> <b>Tambah Video</b></a>
           <?php if (isset($_GET['q'])) { ?>
-          <h3>Total <b>{{ count($user) }}</b> ditemukan, pencarian dari kata <b>"{{ $_GET['q'] }}"</b></h3>
+          <h3>Total <b>{{ count($video) }}</b> ditemukan, pencarian dari kata <b>"{{ $_GET['q'] }}"</b></h3>
           <?php } ?>
           <div class="card">
             <div class="card-header card-header-primary">
-              <h4 class="card-title ">Data User</h4>
+              <h4 class="card-title ">Data Video</h4>
               {{--<p class="card-category"> </p>--}}
             </div>
             <div class="card-body">
@@ -65,13 +65,13 @@
                     #
                   </th>
                   <th>
-                    Name
-                  </th>
-                  <th>
-                    Email
+                    Nama Video
                   </th>
                   <th>
                     Materi
+                  </th>
+                  <th>
+                    View
                   </th>
                   <th>
                     Action
@@ -79,27 +79,29 @@
                   </thead>
                   <tbody>
 
-                  <?php $i=1; foreach ($user as $u) { ?>
+                  <?php $i=1; foreach ($video as $v) { ?>
                   <tr>
                     <td>
                       {{ $i++ }}
                     </td>
                     <td>
-                      {{ $u->name }}
+                      {{ $v->nama_video }}
                     </td>
                     <td>
-                      {{ $u->email }}
+                      @if(empty($v->materi->nama_materi)) <i>Materi tidak ditemukan</i> @else {{ $v->materi->nama_materi }} @endif
                     </td>
                     <td>
-                        10
+                      <?php if ($v->dilihat == "") {
+                        ?>
+                      0
+                      <?php }else{ ?>
+                      {{ $v->dilihat }}
+                      <?php } ?>
                     </td>
                     <td class="text-primary">
-                      <form method="POST">
-                        @csrf
-                        <a href="{{ url('admin/user/edit/'.$u->id.'/'.str_slug($u->name,'-')) }}" name="edit" class="btn btn-sm btn-primary"><i class="material-icons">edit</i></a>
-                        <button value="{{ $u->id }}" onclick="return confirm('Apakah anda yakin menghapus data ini?')" name="remove" class="btn btn-sm btn-danger"><i class="fa fa-close"></i></button>
-                        <a href="{{ url('admin/user/'.$u->id.'/'.str_slug($u->name,'-')) }}" name="edit" class="btn btn-sm btn-success"><i class="material-icons">visibility</i></a>
-                      </form>
+                      <a href="{{ url('/admin/video/edit/'.$v->id.'/'.str_slug($v->nama_video,'-')) }}" class="btn btn-sm btn-primary"><i class="material-icons">edit</i></a>
+                      <a onclick="return confirm('Apakah anda yakin menghapus data ini?')" href="{{ url('/admin/video/del/'.$v->id.'/'.str_slug($v->nama_video,'-')) }}" class="btn btn-sm btn-danger"><i class="fa fa-close"></i></a>
+                      <a href="{{ url('/admin/video/view/'.$v->id.'/'.str_slug($v->nama_video,'-')) }}" class="btn btn-sm btn-success"><i class="material-icons">visibility</i></a>
                     </td>
                   </tr>
                   <?php } ?>
@@ -111,7 +113,7 @@
         </div>
       </div>
       <?php if (!isset($_GET['q'])) { ?>
-      {{ $user->links() }}
+      {{ $video->links() }}
       <?php } ?>
     </div>
   </div>

@@ -923,3 +923,34 @@ div.hero p{
 
 
 /*>>>>>>> f6705803c4e2bfce00eefa1b45d43be8e11a337d*/
+.bg-visa {
+    background-image: url('../img/visa.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 61px;
+    height: 38px;
+}
+
+.bg-mastercard {
+    background-image: url('../img/mastercard.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 61px;
+    height: 38px;
+}
+
+.bg-paypal {
+    background-image: url('../img/paypal.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 61px;
+    height: 38px;
+}
+
+.bg-bca {
+    background-image: url('../img/bca.webp');
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 75px;
+    height: 38px;
+}

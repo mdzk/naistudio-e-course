@@ -6,19 +6,19 @@
       <p>Dashboard</p>
     </a>
   </li>
-  <li class="nav-item  ">
+  <li class="nav-item ">
     <a class="nav-link" href="{{ url('admin/transaksi') }}">
       <i class="material-icons">notifications</i>
       <p>Transaksi</p>
     </a>
   </li>
-  <li class="nav-item active ">
+  <li class="nav-item  ">
     <a class="nav-link" href="{{ url('admin/user') }}">
       <i class="material-icons">person</i>
       <p>User</p>
     </a>
   </li>
-  <li class="nav-item  ">
+  <li class="nav-item active ">
     <a class="nav-link" href="{{ url('admin/materi') }}">
       <i class="material-icons">book</i>
       <p>Materi</p>
@@ -46,16 +46,15 @@
 @section('content')
   <div class="content">
     <div class="container-fluid">
-      <div class="row">
+      <div class="row">\
         <div class="col-md-12">
-          <a href="{{ url('admin/user/add') }}" class="btn btn-success"><i class="material-icons">add</i> <b>Tambah User</b></a>
+          <a href="{{ url('admin/materi/add') }}" class="btn btn-success"><i class="material-icons">add</i> <b>Tambah Materi</b></a>
           <?php if (isset($_GET['q'])) { ?>
-          <h3>Total <b>{{ count($user) }}</b> ditemukan, pencarian dari kata <b>"{{ $_GET['q'] }}"</b></h3>
+          <h3>Total <b>{{ count($materi) }}</b> ditemukan, pencarian dari kata <b>"{{ $_GET['q'] }}"</b></h3>
           <?php } ?>
           <div class="card">
             <div class="card-header card-header-primary">
-              <h4 class="card-title ">Data User</h4>
-              {{--<p class="card-category"> </p>--}}
+              <h4 class="card-title ">Data Materi</h4>
             </div>
             <div class="card-body">
               <div class="table-responsive">
@@ -65,13 +64,13 @@
                     #
                   </th>
                   <th>
-                    Name
+                    Nama Materi
                   </th>
                   <th>
-                    Email
+                    Kategori
                   </th>
                   <th>
-                    Materi
+                    Harga
                   </th>
                   <th>
                     Action
@@ -79,26 +78,35 @@
                   </thead>
                   <tbody>
 
-                  <?php $i=1; foreach ($user as $u) { ?>
+                  <?php $i=1; foreach ($materi as $m) { ?>
                   <tr>
                     <td>
                       {{ $i++ }}
                     </td>
                     <td>
-                      {{ $u->name }}
+                      {{ $m->nama_materi }}
                     </td>
                     <td>
-                      {{ $u->email }}
+                      @if(empty($m->kategori->nama_kategori))
+                        <i>Tanpa Kategori</i>
+                        @else
+                        {{ $m->kategori->nama_kategori }}
+                        @endif
                     </td>
                     <td>
-                        10
+                      @if($m->harga == 'FREE')
+                        FREE
+                        @else
+                        Rp. {{ number_format($m->harga) }},-
+                      @endif
                     </td>
                     <td class="text-primary">
                       <form method="POST">
                         @csrf
-                        <a href="{{ url('admin/user/edit/'.$u->id.'/'.str_slug($u->name,'-')) }}" name="edit" class="btn btn-sm btn-primary"><i class="material-icons">edit</i></a>
-                        <button value="{{ $u->id }}" onclick="return confirm('Apakah anda yakin menghapus data ini?')" name="remove" class="btn btn-sm btn-danger"><i class="fa fa-close"></i></button>
-                        <a href="{{ url('admin/user/'.$u->id.'/'.str_slug($u->name,'-')) }}" name="edit" class="btn btn-sm btn-success"><i class="material-icons">visibility</i></a>
+                        <a href="{{ url('admin/materi/edit/'.$m->id.'/'.str_slug($m->nama_materi,'-')) }}" name="edit" class="btn btn-sm btn-primary"><i class="material-icons">edit</i></a>
+                        <a href="{{ url('admin/materi/del/'.$m->id.'/'.str_slug($m->nama_materi,'-')) }}" onclick="return confirm('Apakah anda yakin menghapus data ini?')" value="{{ $m->id }}" name="delete" class="btn btn-sm btn-danger"><i class="fa fa-close"></i></a>
+                        <a href="{{ url('admin/materi/view/'.$m->id.'/'.str_slug($m->nama_materi,'-')) }}" name="view" class="btn btn-sm btn-success"><i class="material-icons">visibility</i></a>
+                        <a href="{{ url('admin/video/add/'.$m->id.'/'.str_slug($m->nama_materi,'-')) }}" name="view" class="btn btn-sm btn-info"><i class="material-icons">video_call</i></a>
                       </form>
                     </td>
                   </tr>
@@ -111,7 +119,7 @@
         </div>
       </div>
       <?php if (!isset($_GET['q'])) { ?>
-      {{ $user->links() }}
+      {{ $materi->links() }}
       <?php } ?>
     </div>
   </div>

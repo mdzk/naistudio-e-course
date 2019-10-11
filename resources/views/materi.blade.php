@@ -1,6 +1,6 @@
 @extends('template')
 @section('title')
-  Artikel
+  {{ $materi->nama_materi }}
 @endsection
 @section('content')
 <div class="wrepper" style="padding: 0">
@@ -25,7 +25,7 @@
               <div class="article-image" style="background-image:url('{{ url('') }}/assets/img/materi/{{ $materi->gambar }}');">
               </div>
               <div class="article-badge">
-                <div class="article-badge-item bg-warning"></i>{{ $materi->kategori->nama_kategori }}</div>
+                @if(empty($materi->kategori->nama_kategori))<div class="article-badge-item bg-danger"> <i>Tanpa Kategori</i> </div>@else <div class="article-badge-item bg-warning">{{ $materi->kategori->nama_kategori }}  </div>@endif
               </div>
             </div>
             <div class="article-details">
@@ -49,6 +49,11 @@
                       <button name="remove" value="{{ $materi->id }}" class="btn btn-lg btn-block btn-danger">
                         <i class="fa fa-bookmark mr-2"></i>Hapus Tanda
                       </button>
+                    @elseif( count($proses)>0 && count($tandai)>0 )
+                    <button name="buy" value="{{ $materi->id }}" class="btn btn-lg btn-block btn-warning" disabled>Sedang diproses</button>
+                    <button name="remove" value="{{ $materi->id }}" class="btn btn-lg btn-block btn-danger">
+                        <i class="fa fa-bookmark mr-2"></i>Hapus Tanda
+                    </button>
                     @elseif( count($beli)>0 )
                       <button name="buy" value="{{ $materi->id }}" class="btn btn-lg btn-block btn-secondary" disabled>Terbeli</button>
                       <button name="bookmark" value="{{ $materi->id }}" class="btn btn-lg btn-block btn-outline-danger">
@@ -59,6 +64,11 @@
                       <button name="remove" value="{{ $materi->id }}" class="btn btn-lg btn-block btn-danger">
                         <i class="fa fa-bookmark mr-2"></i>Hapus Tanda
                       </button>
+                    @elseif( count($proses)>0 )
+                    <button name="buy" value="{{ $materi->id }}" class="btn btn-lg btn-block btn-warning" disabled>Sedang diproses</button>
+                    <button name="bookmark" value="{{ $materi->id }}" class="btn btn-lg btn-block btn-outline-danger">
+                        <i class="fa fa-bookmark mr-2"></i>Tandai
+                    </button>
                     @else
                       <button name="buy" value="{{ $materi->id }}" class="btn btn-lg btn-block btn-primary">Beli Sekarang</button>
                       <button name="bookmark" value="{{ $materi->id }}" class="btn btn-lg btn-block btn-outline-danger">
@@ -107,12 +117,12 @@
               </div>
 
               <div class="article-user">
-                <img alt="image" src="{{ url('') }}/assets/img/david_naista.jpg">
+                <img alt="image" @if(empty($materi->users->gambar))  src="{{ url('/') }}/assets/img/avatar-1.png" @else src="{{ url('') }}/assets/img/user/{{ $materi->users->gambar }}" @endif>
                 <div class="article-user-details">
                   <div class="user-detail-name">
-                    <a href="#">David Naista</a>
+                    <a href="#">{{ $materi->users->name }}</a>
                   </div>
-                  <div class="text-job">Web Developer</div>
+                  <div class="text-job">@if(empty($materi->users->status)) WEB DEVELOPER @else {{ $materi->users->status }} @endif</div>
                 </div>
               </div>
             </div>

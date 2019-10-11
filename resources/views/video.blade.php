@@ -1,6 +1,6 @@
 @extends('template')
 @section('title')
-  Belajar PHP Dasar
+  {{ $video->nama_video }}
 @endsection
 @section('content')
 <div class="wrepper" style="padding: 0">
@@ -23,12 +23,12 @@
               </div>
 
               <div class="article-user mb-4">
-                <img alt="image" src="{{ url('') }}/assets/img/david_naista.jpg">
+                <img alt="image" @if(empty($video->materi->users->gambar))  src="{{ url('/') }}/assets/img/avatar-1.png" @else src="{{ url('') }}/assets/img/user/{{ $video->materi->users->gambar }}" @endif>
                 <div class="article-user-details">
                   <div class="user-detail-name">
-                    <a href="#">David Naista</a>
+                    <a href="#">{{ $video->materi->users->name }}</a>
                   </div>
-                  <div class="text-job">Web Developer</div>
+                  <div class="text-job">@if(empty($video->materi->users->status)) WEB DEVELOPER @else {{ $video->materi->users->status }} @endif</div>
                 </div>
               </div>
 
@@ -62,11 +62,11 @@
                 <?php } ?>
 
               </ul>
-              <div class="text-center pt-1 pb-1">
+              <!-- <div class="text-center pt-1 pb-1">
                 <a href="#" class="btn btn-primary btn-lg btn-round">
                   View All
                 </a>
-              </div>
+              </div> -->
             </div>
           </div>
         </div>

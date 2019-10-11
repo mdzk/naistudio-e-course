@@ -16,6 +16,11 @@
 	<link rel="stylesheet" href="{{ url('/') }}/assets/plugin/bootstrap/css/bootstrap.min.css">
 	<!-- Font Awesome -->
 	<link rel="stylesheet" href="{{ url('/') }}/assets/plugin/font-awesome/font-awesome.min.css">
+
+	<!-- JavaScript -->
+	<script src="{{ url('/') }}/assets/plugin/jquery.js"></script>
+	<script src="{{ url('/') }}/assets/plugin/popper.min.js"></script>
+	<script src="{{ url('/') }}/assets/plugin/bootstrap/js/bootstrap.min.js"></script>
 </head>
 <body>
 	<header id="header">
@@ -45,45 +50,24 @@
             <div class="dropdown-header">Notifications
             </div>
             <div style="height: auto" class="dropdown-list-content dropdown-list-icons">
-              <a href="#" class="dropdown-item dropdown-item-unread">
-                <div class="dropdown-item-icon bg-primary text-white">
-                  <i class="fa fa-book"></i>
-                </div>
-                <div class="dropdown-item-desc">
-                  Materi baru telah hadir!
-                  <div class="time text-primary">2 Min Ago</div>
-                </div>
-              </a>
-              <a href="#" class="dropdown-item">
-                <div class="dropdown-item-icon bg-info text-white">
-                  <i class="fa fa-user"></i>
-                </div>
-                <div class="dropdown-item-desc">
-                  <b>Painem</b> mengikuti anda
-                  <div class="time">10 Hours Ago</div>
-                </div>
-              </a>
-              <a href="#" class="dropdown-item dropdown-item-unread">
-                <div class="dropdown-item-icon bg-primary text-white">
-                  <i class="fa fa-book"></i>
-                </div>
-                <div class="dropdown-item-desc">
-                  Materi baru telah hadir!
-                  <div class="time text-primary">2 Min Ago</div>
-                </div>
-              </a>
-              <a href="#" class="dropdown-item dropdown-item-unread">
-                <div class="dropdown-item-icon bg-primary text-white">
-                  <i class="fa fa-book"></i>
-                </div>
-                <div class="dropdown-item-desc">
-                  Materi baru telah hadir!
-                  <div class="time text-primary">2 Min Ago</div>
-                </div>
-              </a>
+
+              <?php 
+              	foreach ($notif as $n) {
+               ?>
+               	<a href="{{ url('materi/'.$n->id.'/'.str_slug($n->nama_materi, '-')) }}" class="dropdown-item dropdown-item-unread">
+	                <div class="dropdown-item-icon bg-primary text-white">
+	                  <i class="fa fa-book"></i>
+	                </div>
+	                <div class="dropdown-item-desc">
+	                  Materi baru telah hadir!
+	                  <div class="time text-primary">{{ $n->nama_materi }}</div>
+	                </div>
+	            </a>
+               <?php } ?>
+              
             </div>
             <div class="dropdown-footer text-center">
-              <a href="#">View All <i class="fa fa-chevron-right"></i></a>
+              <a href="{{ url('kursus') }}">View All <i class="fa fa-chevron-right"></i></a>
             </div>
           </div>
         </li>
@@ -94,7 +78,10 @@
               <a href="{{ url('/profile') }}" class="dropdown-item has-icon">
                 <i class="fa fa-user"></i> Profile
               </a>
-              <a href="{{ url('profile/setting/' . Auth::user()->id . '/' . str_slug(Auth::user()->name, '-')) }}" class="dropdown-item has-icon">
+			  <a href="{{ url('profile/history') }}" class="dropdown-item has-icon">
+				<i class="fa fa-clock-o"></i> History
+			  </a>
+              <a href="{{ url('profile/setting') }}" class="dropdown-item has-icon">
                 <i class="fa fa-cog"></i> Settings
               </a>
               <div class="dropdown-divider"></div>
@@ -123,7 +110,7 @@
 						<a class="" href="{{ url('/login') }}">MASUK</a>
 					</li>
 					<li>
-						<a href="javascript:" class="btn btn-sm btn-gradient disabled">
+						<a href="{{ url('/daftar') }}" class="btn btn-sm btn-gradient">
 							<span class="m-2">DAFTAR</span>
 						</a>
 					</li>
@@ -143,17 +130,22 @@
 		<div class="nav-mobile-wrepper">
 			<ul class="text-center ">
 				<li class="nav">
-					<a href="javascript:" class="mx-auto">Home</a>
+					<a href="{{ url('/') }}" class="mx-auto">Home</a>
 				</li>
 				<li class="nav">
-					<a href="javascript:" class="mx-auto">Kategori</a>
+					<a href="{{ url('kursus') }}" class="mx-auto">Kursus</a>
 				</li>
 				<li class="nav">
-					<a href="javascript:" class="mx-auto">Tentang Kami</a>
+					<a href="{{ url('tentang') }}" class="mx-auto">Tentang Kami</a>
 				</li>
 				<li class="nav mb-3">
-					<a href="javascript:" class="mx-auto">Kontak</a>
+					<a href="{{ url('kontak') }}" class="mx-auto">Kontak</a>
 				</li>
+				@if(Auth::user())
+				<li class="nav mb-3">
+					<a href="{{ url('profile') }}" class="mx-auto">Profile</a>
+				</li>
+				@else
 				<li class="flex mt-4 mb-3 margin-center">
 					<span>
 						<a href="javascript:" class="btn btn-border-blue">Masuk</a>
@@ -165,6 +157,7 @@
 						<a href="javascript:" class="btn btn-color-blue disabled">Daftar</a>
 					</span>
 				</li>
+				@endif
 			</ul>
 			<p class="text-center mb-1 copy-header">
 				<span>&copy; CV Naistudio</span>
@@ -219,9 +212,6 @@
 		</div>
 	</footer>
 
-	<script src="{{ url('/') }}/assets/plugin/jquery.js"></script>
-	<script src="{{ url('/') }}/assets/plugin/popper.min.js"></script>
-	<script src="{{ url('/') }}/assets/plugin/bootstrap/js/bootstrap.min.js"></script>
 	<script src="{{ url('/') }}/assets/js/functions.js"></script>
 	<script src="{{ url('/') }}/assets/js/main.js"></script>
 </body>

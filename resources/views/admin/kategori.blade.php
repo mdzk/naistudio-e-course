@@ -6,13 +6,13 @@
       <p>Dashboard</p>
     </a>
   </li>
-  <li class="nav-item  ">
+  <li class="nav-item ">
     <a class="nav-link" href="{{ url('admin/transaksi') }}">
       <i class="material-icons">notifications</i>
       <p>Transaksi</p>
     </a>
   </li>
-  <li class="nav-item active ">
+  <li class="nav-item  ">
     <a class="nav-link" href="{{ url('admin/user') }}">
       <i class="material-icons">person</i>
       <p>User</p>
@@ -24,7 +24,7 @@
       <p>Materi</p>
     </a>
   </li>
-  <li class="nav-item  ">
+  <li class="nav-item active ">
     <a class="nav-link" href="{{ url('admin/kategori') }}">
       <i class="material-icons">bookmark</i>
       <p>Kategori</p>
@@ -47,14 +47,10 @@
   <div class="content">
     <div class="container-fluid">
       <div class="row">
-        <div class="col-md-12">
-          <a href="{{ url('admin/user/add') }}" class="btn btn-success"><i class="material-icons">add</i> <b>Tambah User</b></a>
-          <?php if (isset($_GET['q'])) { ?>
-          <h3>Total <b>{{ count($user) }}</b> ditemukan, pencarian dari kata <b>"{{ $_GET['q'] }}"</b></h3>
-          <?php } ?>
+        <div class="col-md-6">
           <div class="card">
             <div class="card-header card-header-primary">
-              <h4 class="card-title ">Data User</h4>
+              <h4 class="card-title ">Data Kategori</h4>
               {{--<p class="card-category"> </p>--}}
             </div>
             <div class="card-body">
@@ -65,13 +61,7 @@
                     #
                   </th>
                   <th>
-                    Name
-                  </th>
-                  <th>
-                    Email
-                  </th>
-                  <th>
-                    Materi
+                    Nama Kategori
                   </th>
                   <th>
                     Action
@@ -79,27 +69,17 @@
                   </thead>
                   <tbody>
 
-                  <?php $i=1; foreach ($user as $u) { ?>
+                  <?php $i=1; foreach ($kategori as $k) { ?>
                   <tr>
                     <td>
                       {{ $i++ }}
                     </td>
                     <td>
-                      {{ $u->name }}
-                    </td>
-                    <td>
-                      {{ $u->email }}
-                    </td>
-                    <td>
-                        10
+                      {{ $k->nama_kategori }}
                     </td>
                     <td class="text-primary">
-                      <form method="POST">
-                        @csrf
-                        <a href="{{ url('admin/user/edit/'.$u->id.'/'.str_slug($u->name,'-')) }}" name="edit" class="btn btn-sm btn-primary"><i class="material-icons">edit</i></a>
-                        <button value="{{ $u->id }}" onclick="return confirm('Apakah anda yakin menghapus data ini?')" name="remove" class="btn btn-sm btn-danger"><i class="fa fa-close"></i></button>
-                        <a href="{{ url('admin/user/'.$u->id.'/'.str_slug($u->name,'-')) }}" name="edit" class="btn btn-sm btn-success"><i class="material-icons">visibility</i></a>
-                      </form>
+                      <a href="{{ url('admin/kategori/edit/' . $k->id . '/' .str_slug($k->nama_kategori, '-')) }}" class="btn btn-sm btn-primary"><i class="material-icons">edit</i></a>
+                      <a onclick="return confirm('Apakah anda yakin menghapus data ini?')" href="{{ url('admin/kategori/del/' . $k->id . '/' .str_slug($k->nama_kategori, '-')) }}" class="btn btn-sm btn-danger"><i class="fa fa-close"></i></a>
                     </td>
                   </tr>
                   <?php } ?>
@@ -109,10 +89,35 @@
             </div>
           </div>
         </div>
+        <div class="col-md-6">
+          <div class="card">
+            <div class="card-header card-header-primary">
+              <h4 class="card-title">
+                @if(isset($kat))
+                  Edit Kategori
+                  @else
+                  Tambah Kategori
+                  @endif
+              </h4>
+            </div>
+            <div class="card-body">
+              <form method="POST">
+                @csrf
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label class="bmd-label-floating">Nama Kategori</label>
+                      <input type="text" name="nama_kategori" class="form-control" @if(isset($kat)) value="{{ $kat->nama_kategori }}" @endif>
+                    </div>
+                  </div>
+                </div>
+                <button type="submit" class="btn btn-primary pull-right">Submit</button>
+                <div class="clearfix"></div>
+              </form>
+            </div>
+          </div>
+        </div>
       </div>
-      <?php if (!isset($_GET['q'])) { ?>
-      {{ $user->links() }}
-      <?php } ?>
     </div>
   </div>
 @endsection

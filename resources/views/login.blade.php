@@ -60,7 +60,7 @@
 							<label>Password</label>
 							<input type="password" name="password" autocomplete="current-password" class="if-input">
 						</div>
-						<button class="if-btn" name="submit" type="submit" value="submit">
+						<button class="if-btn" name="daftar" type="submit" value="submit">
 							Daftar
 						</button>
 					</form>

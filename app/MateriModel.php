@@ -15,7 +15,7 @@ class MateriModel extends Model
     }
 
     public function users() {
-        return $this->hasOne('App\User','id','id_penulis');
+        return $this->hasOne('App\User','id','id_user');
     }
 
     public function beli() {
